@@ -1,0 +1,33 @@
+---
+isisTable:
+ rpc: get-isis-database-information
+ args:
+   extensive: True
+ item: isis-database
+ view: isisView
+ key: level
+
+isisView:
+ fields:
+  level: level
+  entry: _entryTable
+
+_entryTable:
+ item: isis-database-entry
+ key: lsp-id
+ view: _entryView
+
+_entryView:
+ fields:
+  lsp_id: lsp-id
+  remoteTable: _remoteTable
+
+_remoteTable:
+ item: isis-neighbor
+ key: is-neighbor-id
+ view: _remoteView
+
+_remoteView:
+ fields:
+  remoteRTR: is-neighbor-id
+  metric: metric
