@@ -3,7 +3,7 @@ from jnpr.junos.exception import ConnectAuthError, ConnectRefusedError, ConnectT
 from isis import isisTable
 import pandas as pd
 
-devices = {'bdr3.inx': '81.91.194.116'}
+devices = {'juniper.lab': '192.168.0.6'}
 
 for name in devices:
 
