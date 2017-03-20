@@ -29,13 +29,9 @@ for name in devices:
   i = 0
   print isis_table
   for isis in isis_table:
-       print isis
        for entry in isis.levelTable:
-	print " second print %s" %entry
         for entry1 in entry.remoteTable:
- 	 print entry1
          for entry2 in entry1.reachability:
-	  print "localRTR:%s , remoteRTR:%s , metric: %s , local_ip: %s , local_interface: %s ,remote_ip: %s ,remote_interface: %s" % (entry.lsp_id,entry2.remoteRTR,entry2.metric,entry2.local_ip,entry2.local_interface,entry2.remote_ip,entry2.remote_interface)
           a = (entry.lsp_id[:-6],entry2.remoteRTR[:-3],entry2.metric,entry2.local_ip,entry2.local_interface,entry2.remote_ip,entry2.remote_interface)
           isis_db.insert(i,(a))
 print "-------"
