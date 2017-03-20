@@ -10,24 +10,39 @@ isisTable:
 isisView:
  fields:
   level: level
-  entry: _entryTable
+  levelTable: _levelTable
 
-_entryTable:
+_levelTable:
  item: isis-database-entry
  key: lsp-id
- view: _entryView
+ view: _database_entryView
 
-_entryView:
+_database_entryView:
  fields:
   lsp_id: lsp-id
   remoteTable: _remoteTable
 
 _remoteTable:
- item: isis-neighbor
- key: is-neighbor-id
+ item: isis-tlv
+ key: hostname-tlv/hostname
  view: _remoteView
 
 _remoteView:
  fields:
-  remoteRTR: is-neighbor-id
-  metric: metric
+  remoteRTR: hostname-tlv/hostname
+  reachability: _reachabilityTable
+
+_reachabilityTable:
+ item: .//reachability-tlv[contains(@heading,'IS extended')]
+ key: address-prefix
+ view: _reachability_tlvView
+
+_reachability_tlvView:
+ fields:
+  remoteRTR: address-prefix
+  metric : metric
+  local_ip: isis-reachability-subtlv/address
+  local_interface: isis-reachability-subtlv/local-ifindex
+  remote_ip: isis-reachability-subtlv/neighbor-prefix
+  remote_interface: isis-reachability-subtlv/remote-ifindex
+
