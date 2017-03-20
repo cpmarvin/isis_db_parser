@@ -39,22 +39,19 @@ print "-------"
 #create panda dataframe
 labels = ['source', 'target', 'metric', 'l_ip','l_int','r_ip','r_int']
 df = pd.DataFrame.from_records(isis_db, columns=labels)
-print "---before sort----"
-print df
+
 
 #create ip pair and sort
 df.loc[:, 'l_ip_r_ip'] = pd.Series([tuple(sorted(each)) for each in list(zip(df.l_ip.values.tolist(), df.r_ip.values.tolist()))])
-print df
+
 
 #remove duplicates based on ip pair
 df1 = df.drop_duplicates(subset=['l_ip_r_ip'])
-print "---after remove duplicates---"
-print df1
+
 
 #remove l_ip_r_ip
 df1.pop('l_ip_r_ip')
-print "---remove l_ip_r_ip" 
-print df1
+
 #convert to dict
 final = df1.to_dict(orient='records')
 
