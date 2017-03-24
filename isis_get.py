@@ -52,8 +52,11 @@ df1 = df.drop_duplicates(subset=['l_ip_r_ip'])
 #remove l_ip_r_ip
 df1.pop('l_ip_r_ip')
 
+#replace none values with 0 , fix non-jnp devices
+df2 = df1.fillna(0)
+
 #convert to dict
-final = df1.to_dict(orient='records')
+final = df2.to_dict(orient='records')
 
 #print 
 print final
